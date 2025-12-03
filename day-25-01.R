@@ -8,6 +8,8 @@
 
 # The actual password is the number of times the dial is left pointing at 0 after any rotation in the sequence.
 
+# Part One ----
+
 ## Replicate the example ---- 
 ## By hand
 v0 = 50 # Start at 50
@@ -22,19 +24,6 @@ v8 = v7 + -99 # which equals 0
 v8 = 0
 v9 = v8 + +14
 v10 = v9 + -82
-
-# put these in as a text file, check readLines fn
-input-01 = "
-L68
-L30
-R48
-L5
-R60
-L55
-L1
-L99
-R14
-L82"
 
 ## With loop, check modulo function 
 library("stringr")
@@ -64,3 +53,11 @@ for (i in seq_along(input)) {
 }
 
 zeros # 1059 *YAY CORRECT 
+# ?`%%` will pull up the info
+# x %% y versus x %/% y
+
+# Part Two ----
+# consider accumulate from purrr()
+
+# Constraints:
+# Start pointing at 50, same as before 
