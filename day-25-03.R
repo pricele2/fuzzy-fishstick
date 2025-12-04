@@ -17,8 +17,20 @@ library("tidyr")
 inp1 = readLines("~/R/advent-of-code/input-03-mre.R") |> as_tibble() |> 
   rename(bank_chr = value)
 
-# for string of length Yn
-# split into n columns 
+# for string of length Yn split into n columns wide
+dim_w = nchar(inp1$bank_chr)[1]
+df0 = str_split_fixed(inp1$bank_chr,"", n = dim_w) |> as_tibble()
+
+# convert back to numeric
+df1 = df0 |> mutate(across(where(is.character), as.numeric))
+
 # compare digit in index place Y to digit in place Y+1 
-# moving to the *left*
-# if Y+1 >= Y, replace Y with 0
+# starting from the left (so, place 15)
+
+df2 = df1 |> 
+  rowwise() |> 
+  mutate(answer1 = which.max(pick(everything()))) |> 
+  ungroup() |> as_tibble() 
+
+# replace first max with NA then find the now-remaining max largest as answer2
+# glue together as whichever vector place (colnum) is smaller, then the larger colnum 
